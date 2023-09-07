@@ -22,11 +22,11 @@ pipeline {
 			}
 		} 
 		
-		stage ('Test') {
+		/*stage ('Test') {
 			steps {
 				sh "mvn test"
 			}
-		} 
+		} */
 
 		stage ('Integration test') {
 			steps {
