@@ -8,7 +8,7 @@ pipeline {
 	}
 	
 	stages {
-		stage ('Build') {
+		stage ('Checkout') {
 			steps {
 				sh 'mvn --version'
 				sh 'docker version'
@@ -16,11 +16,22 @@ pipeline {
 				echo "PATH - $PATH"
 			}
 		}
-		/*stage ('Test') {
+		stage ('Compile') {
 			steps {
-				echo "Test"
+				sh "maven clean compile"
 			}
-		} */
+		} 
 		
+		stage ('Test') {
+			steps {
+				sh "mvn test"
+			}
+		} 
+
+		stage ('Integration test') {
+			steps {
+				sh "mvn failsafe:integration-test failsafe:verify"
+			}
+				
 	}	
 }
